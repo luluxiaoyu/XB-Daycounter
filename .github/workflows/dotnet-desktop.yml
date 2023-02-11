@@ -33,7 +33,7 @@ jobs:
 
     # 安装 NuGet
     - name: 安装 NuGet
-      uses: nuget/setup-nuget@v3
+      uses: nuget/setup-nuget@v1
       with:
         nuget-api-key: ${{ secrets.NuGetAPIKey }}
         nuget-version: '5.x'
