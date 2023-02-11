@@ -1,0 +1,52 @@
+﻿<Window x:Class="MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:XBproplusmax"
+        mc:Ignorable="d" xmlns:hc="https://handyorg.github.io/handycontrol" Topmost="True" ResizeMode="NoResize"
+        Title="DayCounter 喜报-Pro Plus Max" Height="450" Width="800" SizeChanged="Window_SizeChanged" Initialized="Window_Initialized" WindowStyle="None">
+    <Window.Background>
+        <ImageBrush ImageSource="/background.png"/>
+    </Window.Background>
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="文本" FontSize="72" Name="text1" HorizontalAlignment="Center" FontFamily="{StaticResource sxt}" TextAlignment="Center"  FontWeight="Bold"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="刷新" Margin="6,6,6,6" Background="#FF4263EA" Foreground="#FFFDFDFD" Click="Button_Click_1"/>
+                    <Button Content="播放音乐" Margin="6,6,6,6" Background="#FF4263EA" Foreground="#FFFDFDFD" Click="Button_Click_2" Name="bt_music"/>
+
+                    <Button Content="设置" Margin="6,6,6,6" Background="#FF4263EA" Foreground="#FFFDFDFD" Click="Button_Click_4"/>
+                    <Button Content="关于" Margin="6,6,6,6" Background="#FF4263EA" Foreground="#FFFDFDFD" Click="Button_Click_3"/>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <StackPanel Orientation="Horizontal" >
+                    <TextBlock Text="在百般无趣的生活探寻一些乐趣" FontSize="15" Foreground="#FFF7F6F6" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Image Source="/78c0c40f7cc89facd10ff38b3385d918_3614720584318019134.png" Width="48"/>
+                </StackPanel>
+                
+            </Grid>
+            <Grid Grid.Column="2">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+                    <Button Content="全屏顶置" Margin="6,6,6,6" Background="#FF4263EA" Foreground="#FFFDFDFD" Click="Button_Click_7"/>
+                    <Button Content="窗口化" Margin="6,6,6,6" Background="#FF4263EA" Foreground="#FFFDFDFD" Click="Button_Click_6"/>
+                    <Button Content="最小化" Margin="6,6,6,6" Background="#FF4263EA" Foreground="#FFFDFDFD" Click="Button_Click_5"/>
+                    <Button Content="退出" Margin="6,6,6,6" Background="#FFC74BE4" BorderBrush="#FFC7E610" Foreground="#FFF7F3F3" Click="Button_Click"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
