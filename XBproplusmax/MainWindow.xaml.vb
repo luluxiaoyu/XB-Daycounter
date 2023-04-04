@@ -11,7 +11,7 @@ Class MainWindow
     Dim sp As SoundPlayer = New SoundPlayer(My.Resources.bgm)
     Dim sp2 As SoundPlayer = New SoundPlayer(My.Resources.bgm_00_00_10_00_00_25)
     Private Sub Window_SizeChanged(sender As Object, e As SizeChangedEventArgs)
-        text1.FontSize = Me.Width / 10
+        text1.FontSize = Me.Width / 11
     End Sub
 
     Private Sub Window_Initialized(sender As Object, e As EventArgs)
@@ -61,14 +61,11 @@ Class MainWindow
             If config("config")("onlytextmode") = "1" Then
                 text1.Text = config("config")("text").ToString
             Else
+                Dim dt2 As DispatcherTimer = New DispatcherTimer()
+                AddHandler dt2.Tick, AddressOf dispatcherTimer_Tick2
+                dt2.Interval = New TimeSpan(0, 0, 1)
+                dt2.Start()
 
-                If dt_now.Date = dt_to.Date Then
-                    text1.Text = "是日" & vbCrLf & config("config")("text").ToString
-                ElseIf dt_now > dt_to Then
-                    text1.Text = "距" & config("config")("text").ToString & vbCrLf & "已经过去" & (dt_now - dt_to).Days + 1 & "天"
-                Else
-                    text1.Text = "距" & config("config")("text").ToString & vbCrLf & "还有" & (dt_to - dt_now).Days + 1 & "天"
-                End If
             End If
 
 
@@ -90,6 +87,32 @@ Class MainWindow
         Catch ex As Exception
             HandyControl.Controls.MessageBox.Show("配置文件出错！", "错误", MessageBoxButton.OK, MessageBoxImage.Error)
             End
+        End Try
+
+    End Sub
+
+    Private Sub dispatcherTimer_Tick2(sender As Object, e As EventArgs)
+        Try
+            Dim parser = New FileIniDataParser()
+            Dim config As IniData = parser.ReadFile(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "\config.ini")
+
+            Dim dt_now As Date = Date.Now
+            Dim dt_to As Date = New DateTime(config("config")("year"), config("config")("month"), config("config")("day"))
+            dt_to = dt_to.AddHours(config("config")("hour"))
+            If dt_now.Date = dt_to.Date Then
+                text1.Text = "是日" & vbCrLf & config("config")("text").ToString
+            ElseIf dt_now > dt_to Then
+                text1.Text = "距" & config("config")("text").ToString & vbCrLf & "已经过去" & (dt_to - dt_now).ToString("dd'天'hh'时'mm'分'ss'秒'") & ""
+            Else
+                Try
+                    text1.Text = "距" & config("config")("text").ToString & vbCrLf & "还有" & (dt_to - dt_now).ToString("dd'天'hh'时'mm'分'ss'秒'") & ""
+                Catch ex As Exception
+                    MessageBox.Show(ex.Message)
+                End Try
+
+            End If
+        Catch ex As Exception
+
         End Try
 
     End Sub
